@@ -10,9 +10,9 @@ export const signup = async (req, res, next) => {
     const newUser = new User({ ...req.body, password: hash });
 
     await newUser.save();
-    res.status(200).send("user has been created");
+    res.status(200).send("User has been created");
   } catch (err) {
-    next(createError(404, `Sorry! user has been not created. ${err}`));
+    next(createError(404, `Sorry! User has not been created. ${err}`));
   }
 };
 
