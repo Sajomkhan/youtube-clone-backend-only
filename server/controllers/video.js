@@ -70,7 +70,7 @@ export const addview = async (req, res, next) => {
 
 export const random = async (req, res, next) => {
   try {
-    const videos = await Video.aggregate([{ $sample: { size: 2 } }]); // sample size means number of videos
+    const videos = await Video.aggregate([{ $sample: { size: 20 } }]); // sample size means number of videos
     res.status(200).json(videos);
   } catch (err) {
     next(err);
@@ -118,7 +118,8 @@ export const getByTag = async (req, res, next) => {
 };
 
 export const search = async (req, res, next) => {
-  const query = req.query.q;
+  const query = req.query.q; 
+
   try {
     const videos = await Video.find({title: {$regex: query, $options: "i"}}).limit(40);
     res.status(200).json(videos);

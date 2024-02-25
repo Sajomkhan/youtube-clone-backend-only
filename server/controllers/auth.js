@@ -29,14 +29,12 @@ export const signin = async (req, res, next) => {
     if (!isCorrectPassword) return next(createError(400, "Wrong credentials"));
 
     const token = jwt.sign({ id: user._id }, process.env.JWT);
-    const { password, ...others } = user._doc // CUT OUT PASSWORD FORM USER
+    const { password, ...others } = user._doc; // CUT OUT PASSWORD FORM USER
 
-    res
-      .cookie("access_token", token, {
+    res.cookie("access_token", token, {
         httpOnly: true,
       })
-      .status(200)
-      .json(others);
+      .status(200).json(others);
   } catch (err) {
     next(err);
   }
